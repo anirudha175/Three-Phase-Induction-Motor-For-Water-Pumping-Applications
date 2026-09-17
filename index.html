@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Technical Cutaway: 0.37kW Wound Rotor Motor & Centrifugal Pump Assembly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Three.js + OrbitControls + FontAwesome Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+  <!-- Canvas Container -->
+  <div id="canvas-container"></div>
+
+  <!-- Loading Overlay -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Generating Precision 3D CAD Cutaway...</div>
+    <div class="loader-sub">0.37 kW Wound Rotor Induction Motor &bull; Centrifugal Water Pump</div>
+  </div>
+
+  <!-- Header Overlay -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="badge"><i class="fa-solid fa-cube"></i> CAD TECHNICAL 3D SIMULATION</div>
+      <h1 class="title">0.37 kW Three-Phase Wound Rotor Motor Coupled to Centrifugal Pump</h1>
+      <p class="subtitle">4-Pole &bull; 1420 RPM &bull; 24-Slot Laminated Stator &bull; 3 Brass Slip Rings &bull; Cast Iron Volute</p>
+    </div>
+    <div class="header-right">
+      <div class="spec-pill"><i class="fa-solid fa-bolt"></i> 400V 3&Phi; 50Hz</div>
+      <div class="spec-pill"><i class="fa-solid fa-gauge-high"></i> <span id="header-rpm">1420</span> RPM</div>
+      <div class="spec-pill status-pill" id="status-pill"><span class="pulse-dot"></span> RUNNING</div>
+    </div>
+  </header>
+
+  <!-- Left Floating View Presets -->
+  <nav class="view-preset-bar">
+    <button class="preset-btn active" data-view="isometric" title="Isometric Overall View"><i class="fa-solid fa-camera"></i> <span>Isometric</span></button>
+    <button class="preset-btn" data-view="cutaway" title="Stator & Rotor Cutaway View"><i class="fa-solid fa-scissors"></i> <span>Motor Cutaway</span></button>
+    <button class="preset-btn" data-view="sliprings" title="Slip Ring & Carbon Brush Assembly"><i class="fa-solid fa-ring"></i> <span>Slip Rings</span></button>
+    <button class="preset-btn" data-view="coupling" title="Flexible Coupling"><i class="fa-solid fa-link"></i> <span>Coupling</span></button>
+    <button class="preset-btn" data-view="pump" title="Pump Volute & Impeller"><i class="fa-solid fa-water"></i> <span>Pump Impeller</span></button>
+  </nav>
+
+  <!-- Floating HUD / Component Details Panel -->
+  <div class="hud-panel" id="detail-panel">
+    <div class="hud-header">
+      <div class="hud-title-wrap">
+        <span class="hud-tag" id="hud-category">ELECTROMECHANICAL SPECIFICATION</span>
+        <h2 id="hud-name">4-Pole Wound Rotor Induction Motor</h2>
+      </div>
+      <button class="close-hud-btn" id="close-hud-btn"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <div class="hud-content">
+      <div class="hud-desc" id="hud-desc">
+        Industrial 0.37 kW (0.5 HP) slip-ring induction motor coupled to a centrifugal water pump on a structural steel baseplate.
+      </div>
+      <div class="specs-grid" id="hud-specs">
+        <div class="spec-item">
+          <span class="label">Stator Outer Dia</span>
+          <span class="val">130 mm</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Stator Bore (ID)</span>
+          <span class="val">65 mm</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Stator Slots</span>
+          <span class="val">24 Semi-closed</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Slot Length x Width</span>
+          <span class="val">53 mm &times; 7 mm</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Winding Wire</span>
+          <span class="val">24 SWG (99 turns/coil)</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Insulation & Lacing</span>
+          <span class="val">Nomex paper + Polyester</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Rotor Core Size</span>
+          <span class="val">70 mm (L) &times; 215 mm (P)</span>
+        </div>
+        <div class="spec-item">
+          <span class="label">Slip Rings</span>
+          <span class="val">3 Brass Rings + Carbon Brushes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Control Deck -->
+  <footer class="control-deck">
+    <div class="deck-group">
+      <button class="control-btn primary" id="btn-power" title="Start / Stop Motor">
+        <i class="fa-solid fa-power-off"></i> <span id="power-text">Stop</span>
+      </button>
+      <div class="slider-control">
+        <label><i class="fa-solid fa-gauge"></i> RPM Speed: <span id="rpm-val">1420</span></label>
+        <input type="range" id="rpm-slider" min="0" max="1500" step="10" value="1420">
+      </div>
+    </div>
+
+    <div class="deck-divider"></div>
+
+    <div class="deck-group">
+      <div class="slider-control">
+        <label><i class="fa-solid fa-layer-group"></i> Exploded View: <span id="explode-val">0%</span></label>
+        <input type="range" id="explode-slider" min="0" max="100" step="1" value="0">
+      </div>
+
+      <div class="slider-control">
+        <label><i class="fa-solid fa-cut"></i> Cutaway Depth: <span id="cutaway-val">50%</span></label>
+        <input type="range" id="cutaway-slider" min="0" max="100" step="1" value="50">
+      </div>
+    </div>
+
+    <div class="deck-divider"></div>
+
+    <div class="deck-group toggles-group">
+      <button class="toggle-btn active" id="btn-flow" title="Toggle Water Flow Particles">
+        <i class="fa-solid fa-water"></i> <span>Flow Particles</span>
+      </button>
+      <button class="toggle-btn active" id="btn-flux" title="Toggle Magnetic Field Lines">
+        <i class="fa-solid fa-wave-square"></i> <span>EM Flux</span>
+      </button>
+      <button class="toggle-btn" id="btn-wireframe" title="Toggle Wireframe Rendering">
+        <i class="fa-solid fa-vector-square"></i> <span>Wireframe</span>
+      </button>
+      <button class="toggle-btn active" id="btn-labels" title="Toggle 3D Annotation Pins">
+        <i class="fa-solid fa-tags"></i> <span>Hotspots</span>
+      </button>
+      <button class="toggle-btn" id="btn-autorotate" title="Toggle Auto Rotation">
+        <i class="fa-solid fa-rotate"></i> <span>Orbit</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- 3D Annotation Overlay Labels -->
+  <div id="labels-container"></div>
+
+  <!-- Quick Guide Tooltip -->
+  <div class="interaction-tip">
+    <i class="fa-solid fa-mouse-pointer"></i> Click components to inspect &bull; Left Click + Drag to rotate &bull; Right Click to pan &bull; Scroll to zoom
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
