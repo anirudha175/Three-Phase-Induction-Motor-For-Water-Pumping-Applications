@@ -10,6 +10,8 @@ INDEX.HTML
 
 AND WILL RUN THE FOLDER BY  SINGLE INSTRUCTIONS
 
+LOCAL HOST 3D VIEW LINK: http://localhost:8080
+
 
   
 
@@ -19,4 +21,4 @@ TESTING VIDEO DRIVE LINK: https://drive.google.com/file/d/1P8U93nQypQxA6yjRKoNO3
 
 HAND CALCULATIONS PDF LINK OF PARAMETER EXTRACTION: https://drive.google.com/file/d/1A6K0tdFA4F6WpQ22rl8Kkh37M6Aep4EN/view?usp=sharing
 
-LOCAL HOST 3D VIEW LINK: http://localhost:8080/
+
