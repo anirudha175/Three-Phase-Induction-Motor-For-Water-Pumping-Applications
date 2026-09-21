@@ -15,7 +15,7 @@ LOCAL HOST 3D VIEW LINK: http://localhost:8080
 
   
 
-PPTX FILE DRIVE LINK:  https://docs.google.com/presentation/d/1nVOTzWk7DY7cwxh0idMDPh5YvgzsiSSc/edit?usp=sharing&ouid=114000301116350527256&rtpof=true&sd=true
+PPTX FILE DRIVE LINK:  https://docs.google.com/presentation/d/1blteUrAFflpWy7bMbMYSsA-svNjelQav/edit?usp=sharing&ouid=114000301116350527256&rtpof=true&sd=true
 
 TESTING VIDEO DRIVE LINK: https://drive.google.com/file/d/1P8U93nQypQxA6yjRKoNO3seB2DO7cxY4/view?usp=drive_link
 
